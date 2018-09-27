@@ -14,7 +14,7 @@ public class LinkedListClient {
 		list.addLast(9);
 		list.addLast(8);
 		list.addLast(10);
-		
+		list.addLast(11);
 		list.display();
 		/*list.removeFirst();
 		list.display();
@@ -25,8 +25,8 @@ public class LinkedListClient {
 		list.removeAt(5);
 		list.display();*/
 		
-		list.reverseDR();
-		list.display();
+
+		System.out.println("2nd Node from end: " + list.KthNodeFromEnd(2));
 
 	}
 

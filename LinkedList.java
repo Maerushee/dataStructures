@@ -289,5 +289,48 @@ public class LinkedList {
 			this.node = node;
 		}
 	}
+	
+	public int midNode()
+	{
+		return this.getMidNode().data;
+	}
+	
+	private Node getMidNode()
+	{   Node present = this.head;
+	    Node future = this.head;
+	    
+	    while(future.next != null && future.next.next != null)
+	    {
+	    	present = present.next;
+	    	future = future.next.next;
+	    }
+	    
+	    return present;
+		
+	}
+	
+	public int KthNodeFromEnd(int k) throws Exception
+	{
+		if(k <= 0 || k > this.size)
+		{
+			throw new Exception("Invalid Index");
+		}
+		
+		Node reqd = this.head;
+		Node skip = this.head;
+		
+		for(int i = 0; i < k; i++)
+		{
+			skip = skip.next;
+		}
+		
+		while(skip != null)
+		{
+			reqd = reqd.next;
+			skip = skip.next;
+		}
+		
+		return reqd.data;
+	}
 
 }
