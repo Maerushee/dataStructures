@@ -204,5 +204,90 @@ public class LinkedList {
 		}
 
 	}
+	
+	public void reverseDI() throws Exception
+	{
+		int li = 0, ri = this.size - 1;
+		while(li <= ri)
+		{
+			Node left = this.getNodeAt(li);
+			Node right = this.getNodeAt(ri);
+			int temp = left.data;
+			left.data = right.data;
+			right.data = temp;
+			li++;
+			ri--;
+		}
+	}
+	
+	public void reversePI()
+	{
+		Node prev = this.head; 
+		Node curr = prev.next;
+		while(curr != null)
+		{
+			Node tempPrev = prev;
+			Node tempCurr = curr;
+			prev = curr;
+			curr = curr.next;
+			tempCurr.next = tempPrev;
+		}
+		
+		Node temp = this.head;
+		this.head = this.tail;
+		this.tail = temp;
+		this.tail.next = null;
+	}
+	
+	public void reversePR() 
+	{ reversePR(this.head);
+	  Node temp = this.tail;
+	  this.tail = this.head;
+	  this.head = temp;
+	  this.tail.next = null;
+	  
+		
+	}
+	
+	private void reversePR(Node node)
+	{  if(node == this.tail) return;
+	   
+	   reversePR(node.next);
+	   node.next.next = node;
+		
+	}
+	
+	public void reverseDR()
+	{
+		HeapMover obj = new HeapMover(this.head);
+		reverseDR(obj, this.head, 0);
+	}
+	
+	private void reverseDR(HeapMover left, Node right, int level)
+	{   if(right == null)
+	   {
+		return;
+	   }
+	
+	   reverseDR(left, right.next, level + 1);
+	   if(level >= this.size / 2)
+	   {
+		   int temp = left.node.data;
+		   left.node.data = right.data;
+		   right.data = temp;
+		   left.node = left.node.next;
+	   }
+		
+	}
+	
+	private class HeapMover
+	{
+		Node node;
+		
+		HeapMover(Node node)
+		{
+			this.node = node;
+		}
+	}
 
 }

@@ -16,13 +16,16 @@ public class LinkedListClient {
 		list.addLast(10);
 		
 		list.display();
-		list.removeFirst();
+		/*list.removeFirst();
 		list.display();
 		list.removeAt(1);
 		list.display();
 		list.removeAt(2);
 		list.display();
 		list.removeAt(5);
+		list.display();*/
+		
+		list.reverseDR();
 		list.display();
 
 	}
