@@ -22,6 +22,13 @@ public class LinkedList {
 		this.tail = null;
 		this.size = 0;
 	}
+	
+	private LinkedList(Node head, Node tail, int size)
+	{
+		this.head = head;
+		this.tail = tail;
+		this.size = size;
+	}
 
 	public boolean isEmpty() {
 		return this.size == 0;
@@ -331,6 +338,69 @@ public class LinkedList {
 		}
 		
 		return reqd.data;
+	}
+	
+	public LinkedList merge(LinkedList second)
+	{
+		Node firstPtr = this.head;
+		Node secondPtr = second.head;
+		LinkedList merged = new LinkedList();
+		
+		while(firstPtr != null && secondPtr != null)
+		{
+			if(firstPtr.data < secondPtr.data)
+			{
+				merged.addLast(firstPtr.data);
+				firstPtr = firstPtr.next;
+			}
+			
+			else
+			{
+				merged.addLast(secondPtr.data);
+				secondPtr = secondPtr.next;
+			}
+		}
+		
+		while(firstPtr != null)
+		{
+			merged.addLast(firstPtr.data);
+			firstPtr = firstPtr.next;
+		}
+		
+		while(secondPtr != null)
+		{
+			merged.addLast(secondPtr.data);
+			secondPtr = secondPtr.next;
+		}
+		return merged;
+	}
+	
+	public void mergeSort()
+	{
+		LinkedList sorted = this.mergeSortHelper(this.head, this.tail);
+		this.head = sorted.head;
+		this.tail = sorted.tail;
+		this.size = sorted.size;
+	}
+	
+	private LinkedList mergeSortHelper(Node head, Node tail)
+	{
+		if(this.size() == 1)
+		{
+			return this;
+		}
+		
+		Node midNode = this.getMidNode();
+		Node midNext = midNode.next;
+		midNode.next = null;
+		
+		LinkedList firstPart = new LinkedList(this.head, midNode, (this.size() + 1) / 2);
+		LinkedList secondPart = new LinkedList(midNext, this.tail, this.size() / 2);
+		
+		firstPart.mergeSort();
+		secondPart.mergeSort();
+		
+		return firstPart.merge(secondPart);
 	}
 
 }
